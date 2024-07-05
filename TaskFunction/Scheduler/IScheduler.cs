@@ -9,7 +9,7 @@ namespace TaskFunction.Scheduler
 {
     public interface IScheduler
     {
-        void ProcessQueue(HandlerFuctory handlerFuctory);
-        int[] GetRezult();
+        void ProcessQueue(HandlerFunction handlerFunction);
+        int[] GetResult();
     }
 }

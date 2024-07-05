@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TaskFunction.Handler
 {
-    public delegate Task<int> HandlerFuctory(string filePath);
-    public class FileHandlerFactory
+    public delegate Task<int> HandlerFunction(string filePath);
+    public class FileHandlerFunction
     {
         public static async Task<int> GetCountSpaceAsync(string filePath)
         {

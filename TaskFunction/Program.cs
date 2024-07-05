@@ -11,16 +11,16 @@ void StartProgram(string startDirectory)
         return new TasksScheduler(startDirectory);
     }
 
-    MeasureTime(GetScheduler(startDirectory), FileHandlerFactory.GetCountSpaceAsync);
-    MeasureTime(GetScheduler(startDirectory), FileHandlerFactory.GetCountSpace);
+    MeasureTime(GetScheduler(startDirectory), FileHandlerFunction.GetCountSpaceAsync);
+    MeasureTime(GetScheduler(startDirectory), FileHandlerFunction.GetCountSpace);
 }
 
-void MeasureTime(IScheduler scheduler, HandlerFuctory handlerFuctory)
+void MeasureTime(IScheduler scheduler, HandlerFunction handlerFuctory)
 {
     var stopWatch = new Stopwatch();
     stopWatch.Start();
     scheduler.ProcessQueue(handlerFuctory);
-    scheduler.GetRezult().ToList().ForEach(c => Console.WriteLine(c));
+    scheduler.GetResult().ToList().ForEach(c => Console.WriteLine(c));
     stopWatch.Stop();
     Console.WriteLine($"Время многопоточной работы программы: {stopWatch.Elapsed}.");
 }

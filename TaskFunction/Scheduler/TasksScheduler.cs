@@ -10,12 +10,11 @@ namespace TaskFunction.Scheduler
     public class TasksScheduler(string startDirectory) : IScheduler
     {
         private readonly List<TaskSchedulerFile> _taskFiles = [];
-        HandlerFuctory? _handlerFuctory;
+        HandlerFunction? _handlerFuctory;
 
         public string StartDirectory { get; set; } = startDirectory;
-        public void ProcessQueue(HandlerFuctory handlerFuctory)
+        public void ProcessQueue(HandlerFunction handlerFuctory)
         {
-            _taskFiles.Clear();
             _handlerFuctory = handlerFuctory;
             foreach (string filename in Directory.EnumerateFiles(StartDirectory))
             {
@@ -30,7 +29,7 @@ namespace TaskFunction.Scheduler
             item.Task = Task.Run<int>(() => _handlerFuctory(item.FilePath));
         }
 
-        public int[] GetRezult() => _taskFiles.Select(f=>f.CountSpace).ToArray();
+        public int[] GetResult() => _taskFiles.Select(f=>f.CountSpace).ToArray();
     }
 
 
