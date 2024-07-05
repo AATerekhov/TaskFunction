@@ -24,10 +24,10 @@ namespace TaskFunction.Scheduler
             _taskFiles.ForEach(file => StartHandlerTask(file));
         }
 
-        private void StartHandlerTask(TaskSchedulerFile item)
+        void StartHandlerTask(TaskSchedulerFile item)
         {
             if(_handlerFuctory != null)
-            item.Task = Task.Run<int>(()=> _handlerFuctory(item.FilePath));
+            item.Task = Task.Run<int>(() => _handlerFuctory(item.FilePath));
         }
 
         public int[] GetRezult() => _taskFiles.Select(f=>f.CountSpace).ToArray();
