@@ -10,10 +10,9 @@ void StartProgram(string startDirectory)
     {
         return new TasksScheduler(startDirectory);
     }
-    var scheduler = GetScheduler(startDirectory);
 
-    MeasureTime(scheduler, FileHandlerFactory.GetCountSpace);
-    MeasureTime(scheduler, FileHandlerFactory.GetCountSpaceAsync);
+    MeasureTime(GetScheduler(startDirectory), FileHandlerFactory.GetCountSpaceAsync);
+    MeasureTime(GetScheduler(startDirectory), FileHandlerFactory.GetCountSpace);
 }
 
 void MeasureTime(IScheduler scheduler, HandlerFuctory handlerFuctory)
@@ -21,7 +20,7 @@ void MeasureTime(IScheduler scheduler, HandlerFuctory handlerFuctory)
     var stopWatch = new Stopwatch();
     stopWatch.Start();
     scheduler.ProcessQueue(handlerFuctory);
+    scheduler.GetRezult().ToList().ForEach(c => Console.WriteLine(c));
     stopWatch.Stop();
     Console.WriteLine($"Время многопоточной работы программы: {stopWatch.Elapsed}.");
-    scheduler.GetRezult().ToList().ForEach(c => Console.WriteLine(c));    
 }
