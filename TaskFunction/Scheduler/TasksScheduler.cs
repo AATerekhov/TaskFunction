@@ -7,16 +7,12 @@ using TaskFunction.Handler;
 
 namespace TaskFunction.Scheduler
 {
-    public class TasksScheduler: IScheduler
+    public class TasksScheduler(string startDirectory) : IScheduler
     {
-        private readonly List<TaskSchedulerFile> _taskFiles = new List<TaskSchedulerFile>();
+        private readonly List<TaskSchedulerFile> _taskFiles = [];
         HandlerFuctory? _handlerFuctory;
-        public TasksScheduler(string startDirectory)
-        {
-            StartDirectory = startDirectory;
-        }
 
-        public string StartDirectory { get; set; }
+        public string StartDirectory { get; set; } = startDirectory;
         public void ProcessQueue(HandlerFuctory handlerFuctory)
         {
             _taskFiles.Clear();
@@ -31,10 +27,10 @@ namespace TaskFunction.Scheduler
         private void StartHandlerTask(TaskSchedulerFile item)
         {
             if(_handlerFuctory != null)
-            item.Task = _handlerFuctory(item.FilePath);
+            item.Task = Task.Run<int>(()=> _handlerFuctory(item.FilePath));
         }
 
-        public int[] GetRezult() => _taskFiles.Select(f=>f.countSpace).ToArray();
+        public int[] GetRezult() => _taskFiles.Select(f=>f.CountSpace).ToArray();
     }
 
 

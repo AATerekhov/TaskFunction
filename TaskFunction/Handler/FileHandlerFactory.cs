@@ -15,10 +15,8 @@ namespace TaskFunction.Handler
         }
         static async Task<string> ReadFileeAsync(string filePath)
         {
-            using (StreamReader source = new StreamReader(filePath))
-            {
-                return await source.ReadToEndAsync();
-            }
+            using var source = new StreamReader(filePath);
+            return await source.ReadToEndAsync();
         }
         public static Task<int> GetCountSpace(string filePath)
         {
@@ -26,10 +24,8 @@ namespace TaskFunction.Handler
         }
         static  string ReadFile(string filePath)
         {
-            using (StreamReader source = new StreamReader(filePath))
-            {
-                return source.ReadToEnd();
-            }
+            using var source = new StreamReader(filePath);
+            return source.ReadToEnd();
         }
 
     }

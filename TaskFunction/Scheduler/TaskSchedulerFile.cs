@@ -6,15 +6,10 @@ using System.Threading.Tasks;
 
 namespace TaskFunction.Scheduler
 {
-    public class TaskSchedulerFile
+    public class TaskSchedulerFile(string filePath)
     {
-        public TaskSchedulerFile(string filePath)
-        {
-            FilePath = filePath;
-        }
-
-        public string FilePath { get; set; }
-        public Task<int> Task { get; set; }
-        public int countSpace { get { return Task.Result; } }
+        public string FilePath { get; set; } = filePath;
+        public Task<int>? Task { get; set; }
+        public int CountSpace => Task.Result;
     }
 }
